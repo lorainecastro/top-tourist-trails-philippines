@@ -168,6 +168,33 @@
       50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
     }
 
+    /* ── STATS ── */
+    #stats {
+      background: var(--bg-stats);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-grid {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+      padding: 32px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-value {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 32px; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--cream);
+    }
+    .stat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; color: var(--text-muted); font-weight: 300;
+    }
+
     /* ── SECTIONS ── */
     .section-label {
       font-family: 'DM Sans', sans-serif;
@@ -190,50 +217,22 @@
       margin: 16px auto 0;
     }
 
-    /* ── ALL TRAILS ── */
-    #trails-section {
+    /* ── FEATURED ── */
+    #featured {
       padding: 100px 40px;
       max-width: 1200px; margin: 0 auto;
     }
-
-    /* ── DIFFICULTY DESCRIPTIONS ── */
-    .difficulty-descriptions {
-      display: flex; gap: 12px; justify-content: center;
-      margin-bottom: 32px; flex-wrap: wrap;
-    }
-    .diff-desc-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      background: rgba(245,240,235,0.04);
-      border: 1px solid rgba(245,240,235,0.08);
-      border-radius: 12px;
-      padding: 12px 16px;
-      max-width: 220px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .diff-desc-item:hover {
-      background: rgba(245,240,235,0.07);
-      border-color: rgba(245,240,235,0.15);
-    }
-    .diff-desc-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      flex-shrink: 0; margin-top: 4px;
-    }
-    .diff-desc-dot.Easy     { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.5); }
-    .diff-desc-dot.Moderate { background: #facc15; box-shadow: 0 0 6px rgba(250,204,21,0.5); }
-    .diff-desc-dot.Hard     { background: #fb923c; box-shadow: 0 0 6px rgba(251,146,60,0.5); }
-    .diff-desc-dot.Expert   { background: #f87171; box-shadow: 0 0 6px rgba(248,113,113,0.5); }
-    .diff-desc-content {}
-    .diff-desc-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px; font-weight: 700;
-      color: var(--cream); margin-bottom: 3px;
-    }
-    .diff-desc-text {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11.5px; font-weight: 300;
-      color: var(--text-muted); line-height: 1.5;
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
 
+    /* ── ALL TRAILS ── */
+    #trails-section {
+      padding: 0 40px 100px;
+      max-width: 1200px; margin: 0 auto;
+    }
     .filters {
       display: flex; gap: 10px;
       justify-content: center;
@@ -349,179 +348,66 @@
     }
     .view-trail-btn:hover { color: #aee8de; gap: 10px; }
 
-    /* ── CAPTURE MOMENTS SECTION ── */
-    #capture-section {
+    /* ── ABOUT SECTION ── */
+    #about {
       padding: 100px 40px;
       background: var(--bg-dark);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    #capture-section::before {
-      content: '';
-      position: absolute;
-      top: -200px; right: -200px;
-      width: 600px; height: 600px;
-      background: radial-gradient(ellipse, rgba(74,124,111,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .capture-inner {
-      max-width: 1200px; margin: 0 auto;
-    }
-    .capture-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-    }
-    .capture-card {
-      border-radius: 16px; overflow: hidden;
-      position: relative; cursor: pointer;
-      transition: transform 0.35s cubic-bezier(.25,.8,.25,1), box-shadow 0.35s ease;
-      background: var(--bg-card);
-    }
-    .capture-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-    }
-    .capture-card:hover .capture-img { transform: scale(1.07); }
-    .capture-img-wrap {
-      position: relative; overflow: hidden; height: 260px;
-    }
-    .capture-img {
-      width: 100%; height: 100%; object-fit: cover;
-      display: block; transition: transform 0.5s ease;
-    }
-    .capture-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.82) 35%, rgba(0,0,0,0.08) 100%);
-    }
-    .capture-photo-badge {
-      position: absolute; top: 14px; left: 14px;
-      display: flex; align-items: center; gap: 6px;
-      background: rgba(110,207,191,0.15);
-      border: 1px solid rgba(110,207,191,0.3);
-      backdrop-filter: blur(8px);
-      border-radius: 100px; padding: 4px 12px;
-    }
-    .capture-photo-badge span {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px; font-weight: 500;
-      color: var(--teal-bright); letter-spacing: 0.04em;
-    }
-    .capture-likes {
-      position: absolute; top: 14px; right: 14px;
-      display: flex; align-items: center; gap: 5px;
-      background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
-      border-radius: 100px; padding: 4px 10px;
-    }
-    .capture-likes span {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px; font-weight: 500; color: #fff;
-    }
-    .capture-card-body {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 20px;
-    }
-    .capture-photographer {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 10px;
-    }
-    .capture-avatar {
-      width: 32px; height: 32px; border-radius: 50%;
-      object-fit: cover; border: 2px solid rgba(110,207,191,0.4);
-      flex-shrink: 0;
-    }
-    .capture-photographer-info {}
-    .capture-photographer-name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px; font-weight: 700; color: var(--cream);
-      line-height: 1.2;
-    }
-    .capture-photographer-handle {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px; color: var(--teal-bright); font-weight: 400;
-    }
-    .capture-caption {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12.5px; color: rgba(245,240,235,0.7);
-      line-height: 1.5; font-weight: 300; margin-bottom: 12px;
-    }
-    .capture-trail-tag {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px; color: rgba(245,240,235,0.45);
-    }
-
-    /* ── ABOUT SECTION ── */
-    #about {
-      padding: 100px 40px;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
     }
     .about-inner {
-      max-width: 1100px; margin: 0 auto;
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
-    .about-header {
-      margin-bottom: 56px;
+    .about-visual {
+      position: relative;
     }
-    .about-header .section-label { text-align: left; }
-    .about-header .section-heading {
-      text-align: left; margin-bottom: 0; max-width: 600px;
-    }
-    .about-content-grid {
+    .about-img-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 64px;
+      grid-template-rows: 200px 200px;
+      gap: 12px;
     }
-    .about-left p {
+    .about-img-grid img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: 12px;
+      display: block;
+    }
+    .about-img-grid img:first-child {
+      grid-row: span 2;
+      height: 100%;
+    }
+    .about-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--teal);
+      border-radius: 16px; padding: 20px 24px;
+      text-align: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .about-badge-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 36px; font-weight: 800;
+      color: #fff; line-height: 1;
+      display: block;
+    }
+    .about-badge-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px; color: rgba(255,255,255,0.7);
+      font-weight: 300; margin-top: 4px; display: block;
+    }
+    .about-text .section-label { text-align: left; }
+    .about-text .section-heading {
+      text-align: left; margin-bottom: 20px;
+    }
+    .about-text p {
       font-family: 'DM Sans', sans-serif;
       font-size: 15px; font-weight: 300;
       color: rgba(245,240,235,0.65);
       line-height: 1.8; margin-bottom: 16px;
     }
-    .about-stats-row {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-      margin-top: 36px;
-    }
-    .about-stat-box {
-      background: rgba(74,124,111,0.1);
-      border: 1px solid rgba(74,124,111,0.25);
-      border-radius: 14px; padding: 20px;
-      text-align: center;
-    }
-    .about-stat-num {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 28px; font-weight: 800;
-      color: var(--teal-bright); letter-spacing: -0.02em;
-      display: block; margin-bottom: 4px;
-    }
-    .about-stat-lbl {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px; color: var(--text-muted); font-weight: 300;
-      letter-spacing: 0.04em;
-    }
-    .about-right {}
-    .about-mission {
-      background: rgba(110,207,191,0.06);
-      border: 1px solid rgba(110,207,191,0.15);
-      border-radius: 16px; padding: 28px;
-      margin-bottom: 28px;
-    }
-    .about-mission-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 15px; font-weight: 700; color: var(--teal-bright);
-      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
-    }
-    .about-mission p {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px; font-weight: 300;
-      color: rgba(245,240,235,0.65); line-height: 1.75;
-    }
     .about-features {
+      margin-top: 36px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-      margin-bottom: 28px;
     }
     .about-feature {
       display: flex; align-items: flex-start; gap: 12px;
@@ -543,33 +429,6 @@
       font-size: 13px; color: var(--text-muted); font-weight: 300;
       line-height: 1.5;
     }
-    .about-values {
-      margin-top: 0;
-    }
-    .about-values-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 15px; font-weight: 700; color: var(--cream);
-      margin-bottom: 14px;
-    }
-    .about-value-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .about-value-item:last-child { border-bottom: none; }
-    .about-value-num {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 11px; font-weight: 700; color: var(--teal-bright);
-      letter-spacing: 0.1em; flex-shrink: 0; width: 28px;
-    }
-    .about-value-text {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13.5px; color: rgba(245,240,235,0.65); font-weight: 300;
-      line-height: 1.5;
-    }
-    .about-value-text strong {
-      color: var(--cream); font-weight: 600;
-    }
     .about-cta {
       margin-top: 40px;
       display: flex; gap: 14px; align-items: center;
@@ -584,9 +443,9 @@
     .about-cta-link:hover { gap: 10px; }
 
     @media (max-width: 900px) {
-      .about-content-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-visual { display: none; }
       .about-features { grid-template-columns: 1fr; }
-      .about-stats-row { grid-template-columns: repeat(3, 1fr); }
     }
 
     /* ── TEAM SECTION ── */
@@ -1043,6 +902,7 @@
       z-index: 1;
     }
 
+    /* ── RESPONSIVE ── */
     /* ── HAMBURGER ── */
     .hamburger {
       display: none;
@@ -1114,19 +974,19 @@
     }
 
     @media (max-width: 900px) {
-      .trails-grid { grid-template-columns: 1fr; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
       .nav-links .nav-link { display: none; }
       .nav-links .btn-primary { display: none; }
       .hamburger { display: flex; }
       .nav-drawer { display: block; }
-      .difficulty-descriptions { gap: 8px; }
-      .diff-desc-item { max-width: 100%; flex: 1; min-width: 140px; }
     }
     @media (max-width: 600px) {
       nav { padding: 0 20px; }
-      #trails-section, #about { padding-left: 20px; padding-right: 20px; }
-      .difficulty-descriptions { flex-direction: column; align-items: stretch; }
-      .diff-desc-item { max-width: 100%; }
+      #featured, #trails-section, #about { padding-left: 20px; padding-right: 20px; }
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -1136,18 +996,22 @@
   <nav id="navbar">
     <a class="nav-logo" href="#">
       <svg width="38" height="32" viewBox="0 0 38 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Back mountain (darker teal) -->
         <path d="M10 28 L20 8 L30 28Z" fill="#4a7c6f" opacity="0.55"/>
+        <!-- Front mountain left (bright teal) -->
         <path d="M2 28 L13 10 L24 28Z" fill="#6ecfbf"/>
+        <!-- Snow cap -->
         <path d="M13 10 L10.5 15.5 L15.5 15.5Z" fill="#f5f0eb" opacity="0.9"/>
+        <!-- Sun / trail dot -->
         <circle cx="30" cy="8" r="3.5" fill="#6ecfbf" opacity="0.85"/>
+        <!-- Horizon line -->
         <line x1="1" y1="28" x2="37" y2="28" stroke="#6ecfbf" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
       </svg>
       <span class="nav-logo-text">Trail<span>PH</span></span>
     </a>
     <div class="nav-links">
-      <a class="nav-link" href="#hero">Home</a>
-      <a class="nav-link" href="#trails-section">All Trails</a>
-      <a class="nav-link" href="#capture-section">Capture Moments</a>
+      <a class="nav-link" href="#featured">Featured</a>
+      <a class="nav-link" href="#trails-section">Trails</a>
       <a class="nav-link" href="#about">About</a>
       <button class="btn-primary" style="padding:10px 22px;font-size:13px;" onclick="document.getElementById('trails-section').scrollIntoView({behavior:'smooth'})">Explore Trails</button>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -1158,20 +1022,20 @@
 
   <!-- MOBILE DRAWER -->
   <div class="nav-drawer" id="nav-drawer">
-    <a class="nav-drawer-link" href="#hero" onclick="closeDrawer()">
-      Home
+    <a class="nav-drawer-link" href="#featured" onclick="closeDrawer()">
+      Featured
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
     <a class="nav-drawer-link" href="#trails-section" onclick="closeDrawer()">
-      All Trails
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-    <a class="nav-drawer-link" href="#capture-section" onclick="closeDrawer()">
-      Capture Moments
+      Trails
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
     <a class="nav-drawer-link" href="#about" onclick="closeDrawer()">
       About
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a class="nav-drawer-link" href="#team" onclick="closeDrawer()">
+      Team
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
     <div class="nav-drawer-cta">
@@ -1199,6 +1063,50 @@
     </div>
   </section>
 
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 17l4-8 4 4 4-6 4 10"/>
+        </svg>
+        <span class="stat-value">10</span>
+        <span class="stat-label">Curated Trails</span>
+      </div>
+      <div class="stat-item">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+        </svg>
+        <span class="stat-value">7,641</span>
+        <span class="stat-label">Islands to Explore</span>
+      </div>
+      <div class="stat-item">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="stat-value">50K+</span>
+        <span class="stat-label">Happy Hikers</span>
+      </div>
+      <div class="stat-item">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        <span class="stat-value">4.7</span>
+        <span class="stat-label">Average Rating</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED TRAILS -->
+  <section id="featured">
+    <div class="section-header">
+      <span class="section-label">Must-Visit Destinations</span>
+      <div class="divider"></div>
+      <h2 class="section-heading">Featured Trails</h2>
+    </div>
+    <div class="featured-grid" id="featured-grid"></div>
+  </section>
+
   <!-- ALL TRAILS -->
   <section id="trails-section">
     <canvas id="trails-particles"></canvas>
@@ -1207,39 +1115,6 @@
       <div class="divider"></div>
       <h2 class="section-heading">All Trails</h2>
     </div>
-
-    <!-- DIFFICULTY DESCRIPTIONS -->
-    <div class="difficulty-descriptions">
-      <div class="diff-desc-item">
-        <div class="diff-desc-dot Easy"></div>
-        <div class="diff-desc-content">
-          <div class="diff-desc-title">Easy</div>
-          <div class="diff-desc-text">Short, flat, well-marked paths. Great for beginners, families, or casual walkers. No prior experience needed.</div>
-        </div>
-      </div>
-      <div class="diff-desc-item">
-        <div class="diff-desc-dot Moderate"></div>
-        <div class="diff-desc-content">
-          <div class="diff-desc-title">Moderate</div>
-          <div class="diff-desc-text">Some elevation gain, uneven terrain. Suitable for those with basic fitness and occasional hiking experience.</div>
-        </div>
-      </div>
-      <div class="diff-desc-item">
-        <div class="diff-desc-dot Hard"></div>
-        <div class="diff-desc-content">
-          <div class="diff-desc-title">Hard</div>
-          <div class="diff-desc-text">Steep climbs, long distance, challenging conditions. Requires fitness, proper gear, and previous trail experience.</div>
-        </div>
-      </div>
-      <div class="diff-desc-item">
-        <div class="diff-desc-dot Expert"></div>
-        <div class="diff-desc-content">
-          <div class="diff-desc-title">Expert</div>
-          <div class="diff-desc-text">Multi-day, technical routes with extreme elevation or hazardous terrain. For seasoned mountaineers only.</div>
-        </div>
-      </div>
-    </div>
-
     <div class="filters">
       <button class="filter-btn active" data-filter="All">All</button>
       <button class="filter-btn" data-filter="Easy">Easy</button>
@@ -1250,137 +1125,78 @@
     <div class="trails-grid" id="trails-grid"></div>
   </section>
 
-  <!-- CAPTURE MOMENTS SECTION -->
-  <section id="capture-section">
-    <div class="capture-inner">
-      <div class="section-header">
-        <span class="section-label">Through the Lens</span>
-        <div class="divider"></div>
-        <h2 class="section-heading">Capture Moments</h2>
-        <p style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;color:rgba(245,240,235,0.55);max-width:520px;margin:16px auto 0;line-height:1.7;">Real moments from real hikers. Every frame tells a story from the trail — sunrises, summits, and everything in between.</p>
-      </div>
-      <div class="capture-grid" id="capture-grid"></div>
-    </div>
-  </section>
-
   <!-- ABOUT SECTION -->
   <section id="about">
     <div class="about-inner">
-      <div class="about-header">
-        <span class="section-label">Who We Are</span>
-        <div class="divider" style="margin:12px 0 16px;"></div>
-        <h2 class="section-heading">Your Guide to the<br>Philippine Wild</h2>
+      <div class="about-visual">
+        <div class="about-img-grid">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="Mountain trail" />
+          <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=600&q=80" alt="Chocolate Hills" />
+          <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" alt="Batanes" />
+        </div>
+        <div class="about-badge">
+          <span class="about-badge-num">10+</span>
+          <span class="about-badge-label">Years of Trails</span>
+        </div>
       </div>
-
-      <div class="about-content-grid">
-        <!-- LEFT COLUMN -->
-        <div class="about-left">
-          <p>TrailPH is a passion project born from a love of the outdoors and a deep pride in the Philippines' extraordinary natural landscapes. From the misty peaks of the Cordillera to the volcanic shores of Bicol, our mission is to connect hikers — local and foreign alike — with the trails that define this archipelago.</p>
-          <p>Every route in our collection is personally scouted, verified, and curated with safety, sustainability, and cultural respect in mind. We partner with local guides, DENR-registered groups, and indigenous communities to ensure each adventure enriches rather than diminishes the landscapes we celebrate.</p>
-          <p>Founded in 2026 by a small group of mountaineers and travel writers, TrailPH has grown into the Philippines' most trusted trail resource. We've helped over 50,000 hikers plan safe, meaningful adventures — from first-timers taking their initial steps in Osmena Peak to experienced climbers pushing for the summit of Mt. Apo.</p>
-          <p>Our database is refreshed seasonally with updated trail conditions, permit changes, weather alerts, and new route discoveries. We believe that every Filipino and every visitor to this country deserves access to accurate, honest, and beautifully presented trail information — completely free.</p>
-
-          <div class="about-stats-row">
-            <div class="about-stat-box">
-              <span class="about-stat-num">10</span>
-              <span class="about-stat-lbl">Curated Trails</span>
+      <div class="about-text">
+        <span class="section-label">Who We Are</span>
+        <h2 class="section-heading">Your Guide to the<br>Philippine Wild</h2>
+        <p>TrailPH is a passion project born from a love of the outdoors and a deep pride in the Philippines' extraordinary natural landscapes. From the misty peaks of the Cordillera to the volcanic shores of Bicol, our mission is to connect hikers — local and foreign alike — with the trails that define this archipelago.</p>
+        <p>Every route in our collection is personally scouted, verified, and curated with safety, sustainability, and cultural respect in mind. We partner with local guides, DENR-registered groups, and indigenous communities to ensure each adventure enriches rather than diminishes the landscapes we celebrate.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
             </div>
-            <div class="about-stat-box">
-              <span class="about-stat-num">50K+</span>
-              <span class="about-stat-lbl">Happy Hikers</span>
-            </div>
-            <div class="about-stat-box">
-              <span class="about-stat-num">10+</span>
-              <span class="about-stat-lbl">Years Active</span>
+            <div>
+              <div class="about-feature-title">Safety First</div>
+              <div class="about-feature-desc">All trails include up-to-date safety advisories and permit requirements.</div>
             </div>
           </div>
-
-          <div class="about-cta">
-            <button class="btn-primary" onclick="document.getElementById('trails-section').scrollIntoView({behavior:'smooth'})">Start Exploring</button>
-            <a class="about-cta-link" href="#team" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'});return false;">
-              Meet our team
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
+          <div class="about-feature">
+            <div class="about-feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8v4M12 16h.01"/>
+              </svg>
+            </div>
+            <div>
+              <div class="about-feature-title">Expert Guidance</div>
+              <div class="about-feature-desc">Tips from seasoned mountaineers and certified local guides.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round">
+                <path d="M3 17l4-8 4 4 4-6 4 10"/>
+              </svg>
+            </div>
+            <div>
+              <div class="about-feature-title">All Skill Levels</div>
+              <div class="about-feature-desc">Easy half-day walks to expert multi-day summit climbs.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="about-feature-title">Local Focus</div>
+              <div class="about-feature-desc">Supporting indigenous communities and DENR-certified trail stewards.</div>
+            </div>
           </div>
         </div>
-
-        <!-- RIGHT COLUMN -->
-        <div class="about-right">
-          <div class="about-mission">
-            <div class="about-mission-title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              Our Mission
-            </div>
-            <p>To make the Philippine wilderness accessible, safe, and celebrated — empowering every hiker with the knowledge and confidence to explore responsibly. We believe nature is for everyone, and that the best adventures leave no trace except footprints and memories.</p>
-          </div>
-
-          <div class="about-features">
-            <div class="about-feature">
-              <div class="about-feature-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="about-feature-title">Safety First</div>
-                <div class="about-feature-desc">All trails include up-to-date safety advisories and permit requirements.</div>
-              </div>
-            </div>
-            <div class="about-feature">
-              <div class="about-feature-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 8v4M12 16h.01"/>
-                </svg>
-              </div>
-              <div>
-                <div class="about-feature-title">Expert Guidance</div>
-                <div class="about-feature-desc">Tips from seasoned mountaineers and certified local guides.</div>
-              </div>
-            </div>
-            <div class="about-feature">
-              <div class="about-feature-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round">
-                  <path d="M3 17l4-8 4 4 4-6 4 10"/>
-                </svg>
-              </div>
-              <div>
-                <div class="about-feature-title">All Skill Levels</div>
-                <div class="about-feature-desc">Easy half-day walks to expert multi-day summit climbs.</div>
-              </div>
-            </div>
-            <div class="about-feature">
-              <div class="about-feature-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="about-feature-title">Local Focus</div>
-                <div class="about-feature-desc">Supporting indigenous communities and DENR-certified trail stewards.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="about-values">
-            <div class="about-values-title">What We Stand For</div>
-            <div class="about-value-item">
-              <span class="about-value-num">01</span>
-              <span class="about-value-text"><strong>Leave No Trace.</strong> We promote responsible hiking practices and environmental stewardship on every trail.</span>
-            </div>
-            <div class="about-value-item">
-              <span class="about-value-num">02</span>
-              <span class="about-value-text"><strong>Community-Driven.</strong> Local guides, indigenous knowledge, and community partnerships are at the heart of every route we publish.</span>
-            </div>
-            <div class="about-value-item">
-              <span class="about-value-num">03</span>
-              <span class="about-value-text"><strong>Always Free.</strong> Quality trail information should be accessible to every Filipino hiker, regardless of background or budget.</span>
-            </div>
-            <div class="about-value-item">
-              <span class="about-value-num">04</span>
-              <span class="about-value-text"><strong>Seasonally Updated.</strong> Trail conditions, permit rules, and safety advisories are reviewed and refreshed every season.</span>
-            </div>
-          </div>
+        <div class="about-cta">
+          <button class="btn-primary" onclick="document.getElementById('trails-section').scrollIntoView({behavior:'smooth'})">Start Exploring</button>
+          <a class="about-cta-link" href="#team" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'});return false;">
+            Meet our team
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -1581,6 +1397,8 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-top">
+
+      <!-- Brand col -->
       <div class="footer-brand">
         <a class="footer-brand-logo" href="#">
           <svg width="34" height="28" viewBox="0 0 38 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1608,16 +1426,20 @@
           </a>
         </div>
       </div>
+
+      <!-- Explore col -->
       <div>
         <div class="footer-col-title">Explore</div>
         <ul class="footer-links">
-          <li><a href="#hero">Home</a></li>
+          <li><a href="#featured">Featured Trails</a></li>
           <li><a href="#trails-section">All Trails</a></li>
-          <li><a href="#capture-section">Capture Moments</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#team">Meet the Team</a></li>
+          <li><a href="#trails-section">Easy Routes</a></li>
+          <li><a href="#trails-section">Hard & Expert</a></li>
+          <li><a href="#about">About Us</a></li>
         </ul>
       </div>
+
+      <!-- Resources col -->
       <div>
         <div class="footer-col-title">Resources</div>
         <ul class="footer-links">
@@ -1628,6 +1450,8 @@
           <li><a href="#">Weather Alerts</a></li>
         </ul>
       </div>
+
+      <!-- Newsletter col -->
       <div class="footer-newsletter">
         <div class="footer-col-title">Stay Updated</div>
         <p class="footer-newsletter-text">Get trail conditions, new routes, and seasonal tips delivered to your inbox.</p>
@@ -1642,7 +1466,9 @@
           <span class="footer-badge"><span class="footer-badge-dot"></span>Free forever</span>
         </div>
       </div>
+
     </div>
+
     <div class="footer-bottom">
       <div class="footer-bottom-left">
         <span class="footer-copy-text">© 2026 TrailPH. All rights reserved.</span>
@@ -1660,107 +1486,66 @@
 
   <script>
     const trails = [
-      { id:1,  name:"Mt. Pulag",            location:"Benguet, Cordillera",  rating:4.9, difficulty:"Hard",     description:"Known as the 'Playground of the Gods,' Mt. Pulag offers a stunning sea of clouds at sunrise and is home to diverse mossy forests and rare wildlife.", image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80", elevation:"2,922m", duration:"2 days" },
-      { id:2,  name:"Banaue Rice Terraces", location:"Ifugao, Cordillera",   rating:4.8, difficulty:"Moderate", description:"A UNESCO World Heritage Site carved into the mountains 2,000 years ago by the Ifugao people. Often called the 'Eighth Wonder of the World.'", image:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80", elevation:"1,500m", duration:"1 day"  },
-      { id:3,  name:"Mt. Apo",              location:"Davao, Mindanao",      rating:4.7, difficulty:"Expert",   description:"The highest peak in the Philippines, Mt. Apo is a must-climb for serious mountaineers with its volcanic landscape and unique biodiversity.", image:"https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80", elevation:"2,954m", duration:"3 days" },
-      { id:4,  name:"Mayon Volcano",        location:"Albay, Bicol",         rating:4.6, difficulty:"Expert",   description:"The world's most perfect volcanic cone, Mayon Volcano dominates the Bicol skyline and offers an awe-inspiring trek for experienced hikers.", image:"https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=800&q=80", elevation:"2,463m", duration:"2 days" },
-      { id:5,  name:"Chocolate Hills",      location:"Bohol",                rating:4.5, difficulty:"Easy",     description:"Over 1,200 perfectly cone-shaped hills spread across Bohol's interior, turning chocolate brown during dry season — one of Asia's most surreal landscapes.", image:"https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=800&q=80", elevation:"120m",   duration:"Half day" },
-      { id:6,  name:"Taal Volcano",         location:"Batangas, Luzon",      rating:4.4, difficulty:"Moderate", description:"A volcano within a lake within a volcano — Taal's unique geological formation makes it one of the world's most fascinating natural wonders.", image:"https://images.unsplash.com/photo-1485470733090-0aae1788d5af?w=800&q=80", elevation:"311m",   duration:"1 day"  },
-      { id:7,  name:"Mt. Pinatubo",         location:"Zambales, Luzon",      rating:4.6, difficulty:"Moderate", description:"Trek through an otherworldly lahar landscape to reach the stunning crater lake of Mt. Pinatubo, formed after the 1991 eruption.", image:"https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&q=80", elevation:"1,486m", duration:"1 day"  },
-      { id:8,  name:"Batanes Trails",       location:"Batanes Islands",      rating:4.9, difficulty:"Easy",     description:"Rolling hills, rugged cliffs, and stone villages define the breathtaking Batanes landscape — the northernmost province of the Philippines.", image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80", elevation:"450m",   duration:"2 days" },
-      { id:9,  name:"Osmena Peak",          location:"Cebu",                 rating:4.3, difficulty:"Easy",     description:"Cebu's highest point offers panoramic views of jagged limestone peaks and distant islands — a rewarding hike for all fitness levels.", image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80", elevation:"1,013m", duration:"Half day" },
-      { id:10, name:"Mt. Hamiguitan",       location:"Davao Oriental",       rating:4.5, difficulty:"Hard",     description:"A UNESCO World Heritage Site and home to the pygmy forest, pitcher plants, and rare Philippine Eagle — a true biodiversity gem.", image:"https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80", elevation:"1,637m", duration:"2 days" },
-    ];
-
-    const captureMoments = [
-      { photographer:"Ana Reyes", handle:"@anareyes.ph", avatar:"https://images.unsplash.com/photo-1494790108755-2616b612b372?w=80&q=80", image:"https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80", caption:"Golden hour breaking through the clouds above Mt. Pulag. Worth every freezing step.", trail:"Mt. Pulag", likes:"2.4k", tag:"Landscape" },
-      { photographer:"Marco Villanueva", handle:"@markov_hikes", avatar:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80", image:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80", caption:"The terraces at dawn — still, green, and timeless. 2,000 years of history in every rice stalk.", trail:"Banaue Rice Terraces", likes:"3.1k", tag:"Cultural" },
-      { photographer:"Pia Santos", handle:"@pia.captures", avatar:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80", image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80", caption:"First light on the summit. The sea of clouds swallowed everything below us — pure magic.", trail:"Mt. Pulag", likes:"1.8k", tag:"Summit" },
-      { photographer:"Diego Cruz", handle:"@diegointhewilds", avatar:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80", image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80", caption:"Jagged limestone ridges at Osmena. Cebu's best-kept secret, and it's right here at home.", trail:"Osmena Peak", likes:"987", tag:"Landscape" },
-      { photographer:"Leah Mendez", handle:"@leahhikes", avatar:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&q=80", image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80", caption:"Batanes feels like another country. Green cliffs, cold winds, and zero crowds. Go now.", trail:"Batanes Trails", likes:"4.2k", tag:"Coastal" },
-      { photographer:"Renz Abalos", handle:"@renz.trails", avatar:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80", image:"https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=800&q=80", caption:"Mayon at its most perfect. No filter needed when the volcano is this dramatic.", trail:"Mayon Volcano", likes:"5.6k", tag:"Volcanic" },
-      { photographer:"Claire Tan", handle:"@claireontrails", avatar:"https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&q=80", image:"https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&q=80", caption:"Pinatubo's crater lake in the morning light. The colour shifts from turquoise to jade — breathtaking.", trail:"Mt. Pinatubo", likes:"2.9k", tag:"Crater Lake" },
-      { photographer:"Jun Flores", handle:"@junexplores", avatar:"https://images.unsplash.com/photo-1463453091185-61582044d556?w=80&q=80", image:"https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=800&q=80", caption:"Chocolate Hills turning brown in April. Like a thousand perfect scoops placed by giants.", trail:"Chocolate Hills", likes:"1.5k", tag:"Scenic" },
-      { photographer:"Nina Ocampo", handle:"@ninaocampo", avatar:"https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&q=80", image:"https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80", caption:"Hamiguitan's pygmy forest is unlike anything I've seen. Tiny, ancient trees in a sea of mist.", trail:"Mt. Hamiguitan", likes:"3.3k", tag:"Forest" },
+      { id:1,  name:"Mt. Pulag",            location:"Benguet, Cordillera",  rating:4.9, difficulty:"Hard",     description:"Known as the 'Playground of the Gods,' Mt. Pulag offers a stunning sea of clouds at sunrise and is home to diverse mossy forests and rare wildlife.", image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80", featured:true,  elevation:"2,922m", duration:"2 days" },
+      { id:2,  name:"Banaue Rice Terraces", location:"Ifugao, Cordillera",   rating:4.8, difficulty:"Moderate", description:"A UNESCO World Heritage Site carved into the mountains 2,000 years ago by the Ifugao people. Often called the 'Eighth Wonder of the World.'", image:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80", featured:true,  elevation:"1,500m", duration:"1 day"  },
+      { id:3,  name:"Mt. Apo",              location:"Davao, Mindanao",      rating:4.7, difficulty:"Expert",   description:"The highest peak in the Philippines, Mt. Apo is a must-climb for serious mountaineers with its volcanic landscape and unique biodiversity.", image:"https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80", featured:true,  elevation:"2,954m", duration:"3 days" },
+      { id:4,  name:"Mayon Volcano",        location:"Albay, Bicol",         rating:4.6, difficulty:"Expert",   description:"The world's most perfect volcanic cone, Mayon Volcano dominates the Bicol skyline and offers an awe-inspiring trek for experienced hikers.", image:"https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=800&q=80", featured:false, elevation:"2,463m", duration:"2 days" },
+      { id:5,  name:"Chocolate Hills",      location:"Bohol",                rating:4.5, difficulty:"Easy",     description:"Over 1,200 perfectly cone-shaped hills spread across Bohol's interior, turning chocolate brown during dry season — one of Asia's most surreal landscapes.", image:"https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=800&q=80", featured:false, elevation:"120m",   duration:"Half day" },
+      { id:6,  name:"Taal Volcano",         location:"Batangas, Luzon",      rating:4.4, difficulty:"Moderate", description:"A volcano within a lake within a volcano — Taal's unique geological formation makes it one of the world's most fascinating natural wonders.", image:"https://images.unsplash.com/photo-1485470733090-0aae1788d5af?w=800&q=80", featured:false, elevation:"311m",   duration:"1 day"  },
+      { id:7,  name:"Mt. Pinatubo",         location:"Zambales, Luzon",      rating:4.6, difficulty:"Moderate", description:"Trek through an otherworldly lahar landscape to reach the stunning crater lake of Mt. Pinatubo, formed after the 1991 eruption.", image:"https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=800&q=80", featured:false, elevation:"1,486m", duration:"1 day"  },
+      { id:8,  name:"Batanes Trails",       location:"Batanes Islands",      rating:4.9, difficulty:"Easy",     description:"Rolling hills, rugged cliffs, and stone villages define the breathtaking Batanes landscape — the northernmost province of the Philippines.", image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80", featured:false, elevation:"450m",   duration:"2 days" },
+      { id:9,  name:"Osmena Peak",          location:"Cebu",                 rating:4.3, difficulty:"Easy",     description:"Cebu's highest point offers panoramic views of jagged limestone peaks and distant islands — a rewarding hike for all fitness levels.", image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80", featured:false, elevation:"1,013m", duration:"Half day" },
+      { id:10, name:"Mt. Hamiguitan",       location:"Davao Oriental",       rating:4.5, difficulty:"Hard",     description:"A UNESCO World Heritage Site and home to the pygmy forest, pitcher plants, and rare Philippine Eagle — a true biodiversity gem.", image:"https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80", featured:false, elevation:"1,637m", duration:"2 days" },
     ];
 
     const pinSVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(245,240,235,0.55)" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>`;
     const starSVG = (sz=13) => `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
     const arrowSVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
-    const heartSVG = `<svg width="13" height="13" viewBox="0 0 24 24" fill="#f87171" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
 
-    function makeCard(trail) {
+    function makeCard(trail, small = false) {
       return `
         <div class="trail-card">
-          <img class="card-img small" src="${trail.image}" alt="${trail.name}" loading="lazy"/>
+          <img class="card-img${small?' small':''}" src="${trail.image}" alt="${trail.name}" loading="lazy"/>
           <div class="card-overlay"></div>
-          <div class="card-badges small">
+          <div class="card-badges${small?' small':''}">
             <span class="difficulty-badge diff-${trail.difficulty}">${trail.difficulty}</span>
           </div>
-          <div class="card-rating small">
-            ${starSVG(12)}
+          <div class="card-rating${small?' small':''}">
+            ${starSVG(small?12:13)}
             <span>${trail.rating}</span>
           </div>
-          <div class="card-content small">
+          <div class="card-content${small?' small':''}">
             <h3>${trail.name}</h3>
             <div class="card-location">
               ${pinSVG}
               <span>${trail.location}</span>
             </div>
-            <div class="card-meta">
-              <span>↑ ${trail.elevation}</span>
-              <span>⏱ ${trail.duration}</span>
-            </div>
+            ${small ? `
+              <div class="card-meta">
+                <span>↑ ${trail.elevation}</span>
+                <span>⏱ ${trail.duration}</span>
+              </div>
+            ` : `
+              <p class="card-desc">${trail.description.slice(0,100)}…</p>
+            `}
             <button class="view-trail-btn">View Trail ${arrowSVG}</button>
           </div>
         </div>`;
     }
 
-    function makeCaptureCard(m) {
-      return `
-        <div class="capture-card">
-          <div class="capture-img-wrap">
-            <img class="capture-img" src="${m.image}" alt="${m.caption}" loading="lazy"/>
-            <div class="capture-img-overlay"></div>
-            <div class="capture-photo-badge">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-              <span>${m.tag}</span>
-            </div>
-            <div class="capture-likes">
-              ${heartSVG}
-              <span>${m.likes}</span>
-            </div>
-          </div>
-          <div class="capture-card-body">
-            <div class="capture-photographer">
-              <img class="capture-avatar" src="${m.avatar}" alt="${m.photographer}" />
-              <div class="capture-photographer-info">
-                <div class="capture-photographer-name">${m.photographer}</div>
-                <div class="capture-photographer-handle">${m.handle}</div>
-              </div>
-            </div>
-            <p class="capture-caption">${m.caption}</p>
-            <div class="capture-trail-tag">
-              ${pinSVG}
-              <span style="color:rgba(245,240,235,0.45);font-family:'DM Sans',sans-serif;font-size:11px;">${m.trail}</span>
-            </div>
-          </div>
-        </div>`;
-    }
+    // Render featured
+    const featuredGrid = document.getElementById('featured-grid');
+    trails.filter(t => t.featured).forEach(t => {
+      featuredGrid.insertAdjacentHTML('beforeend', makeCard(t, false));
+    });
 
     // Render all trails
     function renderTrails(filter) {
       const grid = document.getElementById('trails-grid');
       const list = filter === 'All' ? trails : trails.filter(t => t.difficulty === filter);
-      grid.innerHTML = list.map(t => makeCard(t)).join('');
+      grid.innerHTML = list.map(t => makeCard(t, true)).join('');
     }
     renderTrails('All');
-
-    // Render capture moments
-    const captureGrid = document.getElementById('capture-grid');
-    captureMoments.forEach(m => {
-      captureGrid.insertAdjacentHTML('beforeend', makeCaptureCard(m));
-    });
 
     // Filter buttons
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1859,13 +1644,17 @@
       hamburger.setAttribute('aria-expanded', String(isOpen));
     });
 
+    // Close drawer when clicking outside
     document.addEventListener('click', e => {
       if (!navDrawer.contains(e.target) && !hamburger.contains(e.target)) {
         closeDrawer();
       }
     });
 
-    window.addEventListener('scroll', () => { closeDrawer(); }, { passive: true });
+    // Close drawer on scroll
+    window.addEventListener('scroll', () => {
+      closeDrawer();
+    }, { passive: true });
 
     // Sticky nav
     window.addEventListener('scroll', () => {
@@ -1886,9 +1675,9 @@
       resize();
       window.addEventListener('resize', resize);
 
-      const TEAL     = '#6ecfbf';
-      const TEAL_DIM = '#4a7c6f';
-      const COUNT    = 55;
+      const TEAL       = '#6ecfbf';   /* --teal-bright */
+      const TEAL_DIM   = '#4a7c6f';   /* --teal */
+      const COUNT      = 55;
 
       const particles = Array.from({ length: COUNT }, () => ({
         x:     Math.random() * canvas.width,
@@ -1897,7 +1686,7 @@
         vx:    (Math.random() - 0.5) * 0.45,
         vy:    (Math.random() - 0.5) * 0.45,
         alpha: Math.random() * 0.55 + 0.15,
-        pulse: Math.random() * Math.PI * 2,
+        pulse: Math.random() * Math.PI * 2,   // phase offset for glow pulsing
       }));
 
       let raf;
@@ -1908,6 +1697,7 @@
 
         const t = Date.now() / 1000;
 
+        // draw connection lines first
         for (let i = 0; i < particles.length; i++) {
           for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
@@ -1927,18 +1717,22 @@
           }
         }
 
+        // draw dots
         particles.forEach(p => {
-          p.x += p.vx; p.y += p.vy;
+          p.x += p.vx;
+          p.y += p.vy;
           if (p.x < 0) p.x = canvas.width;
           if (p.x > canvas.width)  p.x = 0;
           if (p.y < 0) p.y = canvas.height;
           if (p.y > canvas.height) p.y = 0;
 
+          // subtle pulse alpha
           const pulsedAlpha = p.alpha * (0.75 + 0.25 * Math.sin(t * 1.4 + p.pulse));
 
+          // outer glow
           const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
-          grd.addColorStop(0, `rgba(110,207,191,${pulsedAlpha * 0.55})`);
-          grd.addColorStop(1, 'rgba(110,207,191,0)');
+          grd.addColorStop(0,   `rgba(110,207,191,${pulsedAlpha * 0.55})`);
+          grd.addColorStop(1,   'rgba(110,207,191,0)');
           ctx.save();
           ctx.globalAlpha = 1;
           ctx.fillStyle = grd;
@@ -1947,6 +1741,7 @@
           ctx.fill();
           ctx.restore();
 
+          // core dot
           ctx.save();
           ctx.globalAlpha = pulsedAlpha;
           ctx.fillStyle = TEAL;
@@ -1961,6 +1756,7 @@
         raf = requestAnimationFrame(draw);
       }
 
+      // Only animate when section is in/near viewport
       const observer = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) { if (!raf) draw(); }
