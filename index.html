@@ -833,6 +833,228 @@
       display: block;
     }
 
+    /* ── ZOOMABLE PHOTO ── */
+    .cm-photo {
+      position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+
+    .cm-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
+      transition: background 0.25s ease;
+      pointer-events: none;
+    }
+
+    .cm-photo:hover::after {
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .cm-photo-zoom-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 2;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.85);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+
+    .cm-photo:hover .cm-photo-zoom-hint {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .cm-photo img {
+      transition: transform 0.45s cubic-bezier(.25, .8, .25, 1);
+      display: block;
+    }
+
+    .cm-photo:hover img {
+      transform: scale(1.04);
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      pointer-events: none;
+      transition: background 0.35s ease;
+    }
+
+    #lightbox.open {
+      background: rgba(0, 0, 0, 0.93);
+      pointer-events: all;
+      cursor: zoom-out;
+    }
+
+    #lightbox-img-wrap {
+      position: relative;
+      max-width: 92vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.88);
+      transition: opacity 0.35s cubic-bezier(.25, .8, .25, 1), transform 0.35s cubic-bezier(.25, .8, .25, 1);
+    }
+
+    #lightbox.open #lightbox-img-wrap {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #lightbox-img {
+      max-width: 92vw;
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+      display: block;
+      object-fit: contain;
+      cursor: zoom-out;
+      user-select: none;
+    }
+
+    #lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10001;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(245, 240, 235, 0.12);
+      border: 1px solid rgba(245, 240, 235, 0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream);
+      transition: background 0.2s, transform 0.2s;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s, background 0.2s;
+    }
+
+    #lightbox.open #lightbox-close {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #lightbox-close:hover {
+      background: rgba(245, 240, 235, 0.25);
+      transform: scale(1.08) !important;
+    }
+
+    /* Prev / Next arrows */
+    .lightbox-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%) scale(0.85);
+      z-index: 10001;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(245, 240, 235, 0.1);
+      border: 1px solid rgba(245, 240, 235, 0.18);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(245, 240, 235, 0.8);
+      opacity: 0;
+      transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s, background 0.2s;
+    }
+
+    #lightbox.open .lightbox-arrow {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+
+    .lightbox-arrow:hover {
+      background: rgba(110, 207, 191, 0.18);
+      border-color: rgba(110, 207, 191, 0.4);
+      color: var(--teal-bright);
+    }
+
+    #lightbox-prev { left: 16px; }
+    #lightbox-next { right: 16px; }
+
+    /* Counter */
+    #lightbox-counter {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10001;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease 0.1s;
+    }
+
+    #lightbox.open #lightbox-counter {
+      opacity: 1;
+    }
+
+    .lb-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(245, 240, 235, 0.3);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .lb-dot.active {
+      background: var(--teal-bright);
+      transform: scale(1.3);
+    }
+
+    /* Caption overlay */
+    #lightbox-caption {
+      position: fixed;
+      bottom: 56px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10001;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: rgba(245, 240, 235, 0.45);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease 0.1s;
+      letter-spacing: 0.03em;
+    }
+
+    #lightbox.open #lightbox-caption {
+      opacity: 1;
+    }
+
     .capture-modal-body {
       padding: 28px 28px 32px;
     }
@@ -1978,6 +2200,14 @@
       .diff-desc-item {
         max-width: 100%;
       }
+
+      #lightbox-prev { left: 8px; }
+      #lightbox-next { right: 8px; }
+
+      .lightbox-arrow {
+        width: 38px;
+        height: 38px;
+      }
     }
   </style>
 </head>
@@ -2150,6 +2380,30 @@
         <div class="capture-modal-photo-count" id="capture-modal-photo-count"></div>
       </div>
     </div>
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox">
+    <button id="lightbox-close" aria-label="Close lightbox">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <button class="lightbox-arrow" id="lightbox-prev" aria-label="Previous photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+    <div id="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="Zoomed photo" draggable="false"/>
+    </div>
+    <button class="lightbox-arrow" id="lightbox-next" aria-label="Next photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+    <div id="lightbox-caption"></div>
+    <div id="lightbox-counter"></div>
   </div>
 
   <!-- ABOUT -->
@@ -2571,14 +2825,14 @@
       { id: 6, trail: "Mayon Volcano", caption: "Mayon at its most perfect. No filter needed when the volcano is this dramatic.", photos: ["mayon4.jpg", "mayon2.jpg", "mayon3.jpg"] },
       { id: 7, trail: "Mt. Pinatubo", caption: "Pinatubo's crater lake in the morning light. The colour shifts from turquoise to jade — breathtaking.", photos: ["pinatubo1.jpg", "pinatubo2.jpg", "pinatubo3.jpg"] },
       { id: 8, trail: "Chocolate Hills", caption: "Chocolate Hills turning brown in April. Like a thousand perfect scoops placed by giants.", photos: ["choco2.jpg", "choco1.jpg", "choco3.jpg"] },
-      { id: 9, trail: "Mt. Apo", caption: "Standing on the beautiful trails of Mount Apo,where nature reminds you how amazing the world.",photos:["mayon1.jpg", "himi1.jpg", "himi2.jpg"] },
-      { id: 10, trail: "Mt. Hamiguitan", caption: "Standing on the beautiful trails of Mount Hamiguitan,where nature reminds you how amazing the world.",photos:["himi4.jpg", "himi.jpg", "himi3.jpg"] }
-  
-      ];
+      { id: 9, trail: "Mt. Apo", caption: "Standing on the beautiful trails of Mount Apo,where nature reminds you how amazing the world.", photos: ["mayon1.jpg", "himi1.jpg", "himi2.jpg"] },
+      { id: 10, trail: "Mt. Hamiguitan", caption: "Standing on the beautiful trails of Mount Hamiguitan,where nature reminds you how amazing the world.", photos: ["himi4.jpg", "himi.jpg", "himi3.jpg"] }
+    ];
 
     const pinSVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(245,240,235,0.55)" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>`;
     const starSVG = (sz = 13) => `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
     const arrowSVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+    const zoomSVG = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>`;
 
     function makeCard(trail) {
       return `
@@ -2689,22 +2943,32 @@
     const captureBackdrop = document.getElementById('capture-modal-backdrop');
     const captureModalEl = document.getElementById('capture-modal');
 
+    // Track current lightbox state
+    let lightboxPhotos = [];
+    let lightboxIndex = 0;
+    let lightboxTrailName = '';
+
     function openCaptureModal(captureId) {
       const m = captureMoments.find(x => x.id === captureId);
       if (!m) return;
 
-      // Always 3 photos — use the 3-column grid layout
+      lightboxPhotos = m.photos;
+      lightboxTrailName = m.trail;
+
       const photos = m.photos;
       const photosEl = document.getElementById('capture-modal-photos');
       photosEl.className = 'capture-modal-photos layout-3';
-      photosEl.innerHTML = photos.map(src => `
-        <div class="cm-photo"><img src="${src}" alt="${m.trail}" loading="lazy"/></div>`).join('');
+      photosEl.innerHTML = photos.map((src, idx) => `
+        <div class="cm-photo" data-photo-index="${idx}" data-capture-id="${m.id}" title="Click to zoom">
+          <img src="${src}" alt="${m.trail} photo ${idx + 1}" loading="lazy"/>
+          <div class="cm-photo-zoom-hint">${zoomSVG}</div>
+        </div>`).join('');
 
       document.getElementById('capture-modal-trail').textContent = m.trail;
       document.getElementById('capture-modal-caption').textContent = m.caption;
 
       const countEl = document.getElementById('capture-modal-photo-count');
-      countEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>${photos.length} photos from this trail`;
+      countEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6ecfbf" stroke-width="1.8" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>${photos.length} photos — click any to zoom`;
       countEl.style.display = 'flex';
 
       captureModalEl.scrollTop = 0;
@@ -2720,8 +2984,117 @@
     document.getElementById('capture-modal-close').addEventListener('click', closeCaptureModal);
     captureBackdrop.addEventListener('click', e => { if (e.target === captureBackdrop) closeCaptureModal(); });
 
+    // ── LIGHTBOX LOGIC ──
+    const lightboxEl = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    function openLightbox(photos, index, trailName) {
+      lightboxPhotos = photos;
+      lightboxIndex = index;
+      lightboxTrailName = trailName;
+      updateLightboxPhoto();
+      lightboxEl.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightboxEl.classList.remove('open');
+      // Restore scroll only if capture modal is also closed
+      if (!captureBackdrop.classList.contains('open')) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function updateLightboxPhoto() {
+      // Fade out, swap, fade in
+      lightboxImg.style.opacity = '0';
+      lightboxImg.style.transform = 'scale(0.96)';
+      setTimeout(() => {
+        lightboxImg.src = lightboxPhotos[lightboxIndex];
+        lightboxImg.alt = `${lightboxTrailName} photo ${lightboxIndex + 1}`;
+        lightboxImg.style.opacity = '1';
+        lightboxImg.style.transform = 'scale(1)';
+      }, 160);
+
+      // Caption
+      lightboxCaption.textContent = `${lightboxTrailName}  ·  Photo ${lightboxIndex + 1} of ${lightboxPhotos.length}`;
+
+      // Dots
+      lightboxCounter.innerHTML = lightboxPhotos.map((_, i) =>
+        `<div class="lb-dot${i === lightboxIndex ? ' active' : ''}" data-lb-index="${i}"></div>`
+      ).join('');
+    }
+
+    function lightboxNext() {
+      lightboxIndex = (lightboxIndex + 1) % lightboxPhotos.length;
+      updateLightboxPhoto();
+    }
+
+    function lightboxPrev() {
+      lightboxIndex = (lightboxIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length;
+      updateLightboxPhoto();
+    }
+
+    // Smooth transition for image
+    lightboxImg.style.transition = 'opacity 0.16s ease, transform 0.16s ease';
+
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-next').addEventListener('click', e => { e.stopPropagation(); lightboxNext(); });
+    document.getElementById('lightbox-prev').addEventListener('click', e => { e.stopPropagation(); lightboxPrev(); });
+
+    lightboxEl.addEventListener('click', e => {
+      // Close when clicking backdrop, not controls
+      if (
+        e.target === lightboxEl ||
+        e.target === document.getElementById('lightbox-img-wrap') ||
+        e.target === lightboxImg
+      ) {
+        closeLightbox();
+      }
+    });
+
+    // Dot navigation
+    lightboxCounter.addEventListener('click', e => {
+      const dot = e.target.closest('.lb-dot');
+      if (dot) {
+        lightboxIndex = parseInt(dot.dataset.lbIndex);
+        updateLightboxPhoto();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (lightboxEl.classList.contains('open')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') lightboxNext();
+        if (e.key === 'ArrowLeft') lightboxPrev();
+        return;
+      }
+      if (e.key === 'Escape') { closeModal(); closeCaptureModal(); }
+    });
+
+    // Swipe support for lightbox
+    let lbTouchStartX = 0;
+    lightboxEl.addEventListener('touchstart', e => { lbTouchStartX = e.touches[0].clientX; }, { passive: true });
+    lightboxEl.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - lbTouchStartX;
+      if (Math.abs(dx) > 50) { dx < 0 ? lightboxNext() : lightboxPrev(); }
+    }, { passive: true });
+
     // ── UNIFIED CLICK HANDLER ──
     document.addEventListener('click', e => {
+      // Zoomable photo in capture modal
+      const photoEl = e.target.closest('.cm-photo');
+      if (photoEl) {
+        const idx = parseInt(photoEl.dataset.photoIndex);
+        const captureId = parseInt(photoEl.dataset.captureId);
+        const m = captureMoments.find(x => x.id === captureId);
+        if (m) openLightbox(m.photos, idx, m.trail);
+        return;
+      }
+
       // Trail cards
       const trailBtn = e.target.closest('.view-trail-btn:not(.view-capture-btn)');
       if (trailBtn) {
@@ -2733,6 +3106,7 @@
         }
         return;
       }
+
       // Capture cards
       const captureBtn = e.target.closest('.view-capture-btn');
       if (captureBtn) {
@@ -2743,10 +3117,6 @@
         }
         return;
       }
-    });
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closeModal(); closeCaptureModal(); }
     });
 
     // ── HAMBURGER MENU ──
