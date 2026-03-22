@@ -1000,8 +1000,13 @@
       color: var(--teal-bright);
     }
 
-    #lightbox-prev { left: 16px; }
-    #lightbox-next { right: 16px; }
+    #lightbox-prev {
+      left: 16px;
+    }
+
+    #lightbox-next {
+      right: 16px;
+    }
 
     /* Counter */
     #lightbox-counter {
@@ -1594,11 +1599,27 @@
     }
 
     @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      14%       { transform: scale(1.18); }
-      28%       { transform: scale(1); }
-      42%       { transform: scale(1.12); }
-      56%       { transform: scale(1); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      14% {
+        transform: scale(1.18);
+      }
+
+      28% {
+        transform: scale(1);
+      }
+
+      42% {
+        transform: scale(1.12);
+      }
+
+      56% {
+        transform: scale(1);
+      }
     }
 
     @media (max-width: 600px) {
@@ -2081,8 +2102,13 @@
         max-width: 100%;
       }
 
-      #lightbox-prev { left: 8px; }
-      #lightbox-next { right: 8px; }
+      #lightbox-prev {
+        left: 8px;
+      }
+
+      #lightbox-next {
+        right: 8px;
+      }
 
       .lightbox-arrow {
         width: 38px;
@@ -2147,7 +2173,7 @@
   <!-- HERO -->
   <section id="hero">
     <video id="hero-bg" autoplay muted loop playsinline>
-      <source src="video.mp4" type="video/mp4"> 
+      <source src="video.mp4" type="video/mp4">
     </video>
     <div id="hero-overlay"></div>
     <div class="hero-content">
